@@ -211,7 +211,7 @@ face_auth/
 ### 📦 Step 1 — Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/face-auth-system.git
+git clone https://github.com/princetiwari26/Face-Authentication-System
 cd face-auth-system
 ```
 
@@ -658,7 +658,7 @@ Contributions, issues, and feature requests are welcome!
 # 1. Fork the repository on GitHub
 
 # 2. Clone your fork
-git clone https://github.com/your-username/face-auth-system.git
+git clone https://github.com/princetiwari26/Face-Authentication-System
 
 # 3. Create a feature branch
 git checkout -b feature/your-feature-name
