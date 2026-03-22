@@ -95,47 +95,47 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                          BROWSER  (React 18 + Vite)                      │
-│                                                                           │
+│                          BROWSER  (React 18 + Vite)                     │
+│                                                                         │
 │  ┌─────────────┐    ┌──────────────────┐    ┌────────────────────────┐  │
-│  │  SignupPage │    │    LoginPage      │    │    DashboardPage       │  │
+│  │  SignupPage │    │    LoginPage     │    │    DashboardPage       │  │
 │  │  2-step:    │    │  ┌────────────┐  │    │  (JWT Protected)       │  │
 │  │  1. Details │    │  │ 🔑 Password│  │    │                        │  │
 │  │  2. Face    │    │  ├────────────┤  │    │  User profile, session │  │
 │  │  capture    │    │  │ 🤳 Face    │  │    │  info, security log    │  │
-│  └─────────────┘    │  └────────────┘  │    └────────────────────────┘  │
-│                      └──────────────────┘                                 │
-│  ┌────────────────────────┐   ┌────────────────────────────────────────┐ │
-│  │    FaceCapture.jsx     │   │        LivenessIndicator.jsx           │ │
-│  │  Webcam + 8fps frames  │   │  👁 Blink  🔄 Head  🖼 Texture  ✓/✗  │ │
-│  └────────────────────────┘   └────────────────────────────────────────┘ │
+│  └─────────────┘    │  └────────────┘  │     └────────────────────────┘ │
+│                     └──────────────────┘                                │
+│  ┌────────────────────────┐   ┌────────────────────────────────────────┐│
+│  │    FaceCapture.jsx     │   │        LivenessIndicator.jsx           ││
+│  │  Webcam + 8fps frames  │   │  👁 Blink  🔄 Head  🖼 Texture  ✓/✗   ││
+│  └────────────────────────┘   └────────────────────────────────────────┘│
 └──────────────────────────────────┬──────────────────────────────────────┘
                                    │  REST API  (Axios + JWT Bearer)
                                    │  Vite Proxy → :8000
                                    ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                        FASTAPI BACKEND  :8000                            │
-│                                                                           │
-│  /api/auth/*               /api/face/*                                    │
+│                        FASTAPI BACKEND  :8000                           │
+│                                                                         │
+│  /api/auth/*               /api/face/*                                  │
 │  ├── POST /signup          ├── POST /liveness-check  ← MediaPipe EAR    │
-│  ├── POST /login           └── POST /login           ← face_recognition  │
-│  ├── GET  /me                                                             │
-│  └── POST /logout                                                         │
-│                                                                           │
-│  ┌──────────────────────────────────────────────────────────────────┐    │
-│  │                      face_service.py                              │    │
-│  │   extract_encoding() → match_face_against_users() → liveness()   │    │
-│  └──────────────────────────────────────────────────────────────────┘    │
-│  bcrypt 12-rounds · JWT HS256 · slowapi rate limiter · Pydantic v2       │
+│  ├── POST /login           └── POST /login           ← face_recognition │
+│  ├── GET  /me                                                           │
+│  └── POST /logout                                                       │
+│                                                                         │
+│  ┌──────────────────────────────────────────────────────────────────┐   │
+│  │                      face_service.py                             │   │
+│  │   extract_encoding() → match_face_against_users() → liveness()   │   │
+│  └──────────────────────────────────────────────────────────────────┘   │
+│  bcrypt 12-rounds · JWT HS256 · slowapi rate limiter · Pydantic v2      │
 └──────────────────────────────────┬──────────────────────────────────────┘
                                    │  SQLAlchemy ORM
                                    ▼
                     ┌──────────────────────────────┐
-                    │        SQLite Database        │
-                    │  id · name · email            │
-                    │  hashed_password              │
-                    │  face_encoding  (128-dim)     │
-                    │  is_active · created_at       │
+                    │        SQLite Database       │
+                    │  id · name · email           │
+                    │  hashed_password             │
+                    │  face_encoding  (128-dim)    │
+                    │  is_active · created_at      │
                     └──────────────────────────────┘
 ```
 
